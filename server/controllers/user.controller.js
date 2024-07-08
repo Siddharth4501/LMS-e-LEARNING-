@@ -1,6 +1,8 @@
 // import { request } from "express";
 import AppError from "../utils/error.utils";
 import User from "../models/user.model";
+import cloudinary from 'cloudinary'
+import fs from 'fs/promises';
 
 const cookieOptions={
     maxAge:7*24*60*60*1000,
@@ -33,6 +35,28 @@ const register=async(req,res)=>{
         return next(new AppError('User registration failed,please try again',400));
     }
 
+    if(req.file){
+        try{
+            const result=await cloudinary.v2.uploader.upload(req.file.path,{
+                folder:'lms',
+                width:250,
+                height:250,
+                gravity:'faces',
+                crop:'fill',
+            });
+            if(result){
+                user.avatar.public_id=result.public_id;
+                user.avatar.secure_url=result.secure_url;
+
+                //remove file from server
+                fs.rm(`uploads/${req.file.filename}`)
+            }
+        }catch(e){
+            fs.rm(`uploads/${req.file.filename}`)
+            return next(new AppError(error|| 'File not uploaded,please try',400))
+        }
+    }
+
     await user.save();
     user.select('-password')
     const token=await user.generateJWTToken();
@@ -42,6 +66,7 @@ const register=async(req,res)=>{
         message:'User registered successfully',
         user,
     })
+    
 };
 
 const login=async (req,res)=>{
