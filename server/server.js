@@ -2,6 +2,7 @@
 import app from './app.js'
 import {config} from 'dotenv';//considers contents of env file and execute it
 import connectionToDB from './config/dbConnection.js';
+
 config();
 
 const PORT = process.env.PORT || 5000;
