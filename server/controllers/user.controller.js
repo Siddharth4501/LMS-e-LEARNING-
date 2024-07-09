@@ -3,6 +3,7 @@ import AppError from "../utils/error.utils";
 import User from "../models/user.model";
 import cloudinary from 'cloudinary'
 import fs from 'fs/promises';
+import sendEmail from "../utils/sendEmail.utils.js";
 
 const cookieOptions={
     maxAge:7*24*60*60*1000,
@@ -35,7 +36,8 @@ const register=async(req,res)=>{
         return next(new AppError('User registration failed,please try again',400));
     }
 
-    if(req.file){
+    if(req.file)// from multer
+        {
         try{
             const result=await cloudinary.v2.uploader.upload(req.file.path,{
                 folder:'lms',
@@ -123,9 +125,178 @@ const getProfile=async (req,res)=>{
     }
 };
 
+const forgetPassword=async (req,res)=>{
+    const {email}=req.body;
+    if(!email){
+        return next(new AppError('email is requuired',400));
+    }
+    const user=await User.findOne({email});
+    if(!user){
+        return next(new AppError('email not registered',400));
+    }
+    const resetToken=await user.generatePasswordResetToken();
+
+    await user.save();
+    const resetPasswordURL=`${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    try{
+        const subject='Reset Password'
+        const message=`You can reset your password by clicking <a href=${resetPasswordURL} target="_blank">Reset Your Password</>\n If above link dose not work then copy paste this link in new tab ${resetPasswordURL}`
+        await sendEmail(email,subject,message);
+        res.status(200).json({
+            success:true,
+            message:`Reset Password token has been sent to ${email} successfully`
+        })
+    }catch(e){
+        user.forgetPasswordExpiry=undefined;
+        user.forgetPasswordToken=undefined;
+        await user.save();
+        return next(new AppError(e.message,500));
+    }
+}
+
+const resetPassword=async(req,res)=>
+    {
+        // Extracting resetToken from req.params object
+        const { resetToken } = req.params;
+      
+        // Extracting password from req.body object
+        const { password } = req.body;
+      
+        // We are again hashing the resetToken using sha256 since we have stored our resetToken in DB using the same algorithm
+        const forgotPasswordToken = crypto
+          .createHash('sha256')
+          .update(resetToken)
+          .digest('hex');
+      
+        // Check if password is not there then send response saying password is required
+        if (!password) {
+          return next(new AppError('Password is required', 400));
+        }
+      
+        console.log(forgotPasswordToken);
+      
+        // Checking if token matches in DB and if it is still valid(Not expired)
+        const user = await User.findOne({
+          forgotPasswordToken,
+          forgotPasswordExpiry: { $gt: Date.now() }, // $gt will help us check for greater than value, with this we can check if token is valid or expired
+        });
+      
+        // If not found or expired send the response
+        if (!user) {
+          return next(
+            new AppError('Token is invalid or expired, please try again', 400)
+          );
+        }
+        
+        // Update the password if token is valid and not expired
+        user.password = password;
+      
+        // making forgotPassword* valus undefined in the DB
+        user.forgetPasswordExpiry = undefined;
+        user.forgetPasswordToken = undefined;
+      
+        // Saving the updated user values
+        await user.save();
+      
+        // Sending the response when everything goes good
+        res.status(200).json({
+          success: true,
+          message: 'Password changed successfully',
+        });
+}
+
+const changePassword=async(req,res)=>{
+    const {oldPassword,newPassword} =req.body;
+    const {id}=req.user;//all information of user is kept in req.user as created in auth.middleware.js
+
+    if(!oldPassword || ! newPassword){
+        return next(new AppError('All fields are mandatory',400))
+    }
+
+    const user= await User.findById(id).select('+password')
+    if(!user){
+        return next(new AppError('User doesn not exist'),400)
+    }
+
+    const isPasswordValid=await user.comaprePassword(oldPassword);
+
+    if(!isPasswordValid){
+        return next(new AppError('invalid old password',400))
+    }
+    user.password=newPassword
+
+    await user.save();
+    user.select('-password');//remove password from user object
+
+    res.status(200).json({
+        success:true,
+        message:'Password changed successfully!'
+    })
+
+
+}
+export const updateUser = async (req, res, next) => {
+    // Destructuring the necessary data from the req object
+    const { fullName } = req.body;
+    const { id } = req.params;
+  
+    const user = await User.findById(id);
+  
+    if (!user) {
+      return next(new AppError('Invalid user id or user does not exist'));
+    }
+  
+    if (fullName) {
+      user.fullName = fullName;
+    }
+  
+    // Run only if user sends a file
+    if (req.file) {
+      // Deletes the old image uploaded by the user
+      await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  
+      try {
+        const result = await cloudinary.v2.uploader.upload(req.file.path, {
+          folder: 'lms', // Save files in a folder named lms
+          width: 250,
+          height: 250,
+          gravity: 'faces', // This option tells cloudinary to center the image around detected faces (if any) after cropping or resizing the original image
+          crop: 'fill',
+        });
+  
+        // If success
+        if (result) {
+          // Set the public_id and secure_url in DB
+          user.avatar.public_id = result.public_id;
+          user.avatar.secure_url = result.secure_url;
+  
+          // After successful upload remove the file from local storage
+          fs.rm(`uploads/${req.file.filename}`);
+        }
+      } catch (error) {
+        return next(
+          new AppError(error || 'File not uploaded, please try again', 400)
+        );
+      }
+    }
+  
+    // Save the user object
+    await user.save();
+  
+    res.status(200).json({
+      success: true,
+      message: 'User details updated successfully',
+    });
+  }
 export {
     register,
     login,
     logout,
-    getProfile
+    getProfile,
+    resetPassword,
+    forgetPassword,
+    changePassword,
+    updateUser,
+
 }

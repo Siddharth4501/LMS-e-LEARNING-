@@ -8,7 +8,7 @@ import errorMiddleware from './middlewares/error.middleware.js';
 const app = express();
 
 app.use(express.json()) // for data parsing from frontend
-
+app.use(express.urlencoded({extended:true}));//helps parsing the url
 app.use(cors({
     origin: [process.env.FRONTEND_URL],
     credentials:true
