@@ -9,7 +9,9 @@ const isLoggedIn=async(req,res,next)=>{
     }
 
     const userDetails=await jwt.verify(token,process.env.JWT_SECRET);//gives data that was stored at the time of generation of Json Web Token
-
+    if(!userDetails){
+        return next(new AppError('Token can not be verified',400))
+    }
     req.user=userDetails;
 
     next();
