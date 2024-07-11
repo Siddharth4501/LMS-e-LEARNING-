@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import userRoutes from './routes/user.routes.js'
 import errorMiddleware from './middlewares/error.middleware.js';
 import courseRoutes from './routes/course.routes.js'
+import paymentRoutes from './routes/payment.routes.js'
 const app = express();
 
 app.use(express.json()) // for data parsing from frontend
@@ -23,6 +24,7 @@ app.use(cookieParser()); //parse token stored in cookie
 
 app.use('/api/vi/user/',userRoutes)//if error comes in this process then it moves down and check other processes
 app.use('/api/v1/courses', courseRoutes);
+app.use('/api/v1/payments', paymentRoutes);
 
 app.all('*',(req,res)=>{
     res.status(404).send('OOPS!! 404 Page Not Found');

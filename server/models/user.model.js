@@ -47,6 +47,10 @@ const userSchema=new Schema({
         type:'String'
     },
     forgetPasswordExpiry:Date,
+    subscription:{
+        id:String,
+        status:String,
+    },
 },{timeStamps:true})
 
 userSchema.pre('save',async function(next){
