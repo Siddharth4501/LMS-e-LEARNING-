@@ -162,7 +162,7 @@ const cancelSubscription=async(req,res,next)=>{
     message: 'Subscription canceled successfully',
   });
 }
-const allPayments = async (req, res, _next) => {
+const allPayments = async (req, res,next) => {
     const { count, skip } = req.query;//in url query
   
     // Find all subscriptions from razorpay
