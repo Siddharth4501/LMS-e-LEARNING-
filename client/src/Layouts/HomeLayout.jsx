@@ -44,7 +44,7 @@ const HomeLayout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-[90vh] w-[100vw] mx-0">
+    <div className="min-h-[90vh] w-[100vw] ">
       {/* adding the daisy ui drawer */}
       <div className="drawer absolute z-50 left-0 w-fit">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -60,7 +60,7 @@ const HomeLayout = ({ children }) => {
 
         <div className="drawer-side w-0">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-48 sm:w-80 bg-base-100 text-base-content relative">
+          <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative" style={{backgroundColor:'rgb(39 43 47)',color:'white',}}>
             {/* close button for drawer */}
             <li className="w-fit absolute right-2 z-50">
               <button onClick={hideDrawer}>
@@ -96,10 +96,10 @@ const HomeLayout = ({ children }) => {
             {!isLoggedIn && (
               <li className="absolute bottom-4 w-[90%]">
                 <div className="w-full flex items-center justify-center">
-                  <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full">
+                  <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full text-dark" style={{backgroundColor:'purple'}}>
                     <Link to={"/login"}>Login</Link>
                   </button>
-                  <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full">
+                  <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full" style={{backgroundColor: 'rgb(200, 64, 86)'}}>
                     <Link to={"/signup"}>Signup</Link>
                   </button>
                 </div>

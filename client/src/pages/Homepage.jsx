@@ -1,7 +1,7 @@
 import React from 'react'
 import HomeLayout from '../Layouts/HomeLayout.jsx'
 import { Link } from "react-router-dom";
-import homePageImg from '../assets/images/HomeImage4.jpg';
+import homePageImg from '../assets/images/homePageMainImage.png';
 const Homepage = () => {
   return (
     <>
@@ -35,7 +35,7 @@ const Homepage = () => {
 
         {/* right section for image */}
         <div className="w-1/2 flex items-center justify-center">
-          <img src={homePageImg} alt="home page image" style={{borderRadius:'50px',maxHeight:'450px',maxWidth:'650px'}} />
+          <img src={homePageImg} alt="home page image" style={{borderRadius:'50px',maxHeight:'450px',maxWidth:'800px'}} />
         </div>
       </div>
     </HomeLayout>
