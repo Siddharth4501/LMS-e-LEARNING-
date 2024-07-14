@@ -10,17 +10,17 @@ const Footer = () => {
             <section className='text-lg'>
                 Copyright {year} | All rights reserved
             </section>
-            <section className="flex items-center justify-center gap 5 text-2xl text-white">
-                <a className='hover:text-yellow-500 transition-all ease-in-out direction-300' href="">
+            <section className="flex items-center justify-center gap-3 text-2xl text-white">
+                <a className='hover:text-gray-400 transition-all ease-in-out direction-300' href="">
                     <BsFacebook/>
                 </a>
-                <a className='hover:text-yellow-500 transition-all ease-in-out direction-300' href="">
+                <a className='hover:text-gray-400 transition-all ease-in-out direction-300' href="">
                     <BsTwitterX/>
                 </a>
-                <a className='hover:text-yellow-500 transition-all ease-in-out direction-300' href="">
+                <a className='hover:text-gray-400 transition-all ease-in-out direction-300' href="">
                     <BsLinkedin/>
                 </a>
-                <a className='hover:text-yellow-500 transition-all ease-in-out direction-300' href="">
+                <a className='hover:text-gray-400 transition-all ease-in-out direction-300' href="">
                     <BsInstagram/>
                 </a>
             </section>
