@@ -44,7 +44,7 @@ const HomeLayout = ({ children }) => {
   };
 
   return (
-    <div className=" ">
+    <div className="">
       {/* adding the daisy ui drawer */}
       <div className="drawer absolute z-50 left-0 w-fit">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
