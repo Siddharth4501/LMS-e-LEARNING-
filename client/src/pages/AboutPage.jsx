@@ -42,7 +42,7 @@ const About = () => {
         </div>
 
         {/* top personalities quotes section */}
-        <div className="carousel md:m-auto md:w-1/2 w-auto my-16">
+        <div className="carousel m-auto md:w-1/2 w-full my-16">
           <div id="slide1" className="carousel-item relative w-full">
             <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
               {/* for personality image */}
