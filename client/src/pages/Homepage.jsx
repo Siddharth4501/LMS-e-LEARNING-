@@ -26,7 +26,7 @@ const Homepage = () => {
               </button>
             </Link>
             <Link to={"/contact"}>
-              <button className="border border-yellow-500 px-5 py-3 rounded-md font-semibold md:text-lg text-xl cursor-pointer hover:border-yellow-600 transition-all ease-in-out duration-300">
+              <button className="border border-yellow-500 px-5 py-3 rounded-md font-semibold md:text-lg text-xl cursor-pointer hover:border-yellow-600 transition-all ease-in-out duration-300 hover:bg-yellow-500">
                 Contact Us
               </button>
             </Link>
