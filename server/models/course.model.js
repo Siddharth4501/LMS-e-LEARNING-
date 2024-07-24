@@ -11,12 +11,12 @@ const courseSchema=new Schema(
         },
         description:{
             type:String,
-            required:[true,'Description is required'],
+            // required:[true,'Description is required'],
             minlength:[20,'Description must be atleast 20 characters long'],
         },
         category:{
             type:String,
-            required:[true,'Category is required'],
+            // required:[true,'Category is required'],
         },
         lectures:[
             {
@@ -25,19 +25,19 @@ const courseSchema=new Schema(
                 lecture:{
                     public_id:{
                         type:String,
-                        required:true,
+                        // required:true,
                     },
                     secure_url:{
                         tyep:String,
-                        required:true,
+                        // required:true,
                     },
                 },
                 
             },
         ],
         thumbnail: {
-            public_id:'Dummy',
-            secure_url: 'Dummy',
+            public_id: String,
+            secure_url: String,
           },
         numberOfLectures: {
         type: Number,
@@ -45,7 +45,7 @@ const courseSchema=new Schema(
         },
         createdBy: {
         type: String,
-        required: [true, 'Course instructor name is required'],
+        // required: [true, 'Course instructor name is required'],
         },
     
     },

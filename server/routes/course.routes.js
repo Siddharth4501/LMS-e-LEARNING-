@@ -1,7 +1,7 @@
 import {Router} from 'express';
-import { getAllCourses,createCourse,getLecturesByCourseId,removeCourse,updateCourse,addLectureToCourseById,removeLectureFromCourse } from '../controllers/course.controller';
-import { isLoggedIn,authorizedRoles } from '../middlewares/auth.middleware';
-import upload from '../middlewares/multer.middleware';
+import { getAllCourses,createCourse,getLecturesByCourseId,removeCourse,updateCourse,addLectureToCourseById,removeLectureFromCourse } from '../controllers/course.controller.js';
+import { isLoggedIn,authorizedRoles } from '../middlewares/auth.middleware.js';
+import upload from '../middlewares/multer.middleware.js';
 
 const router=Router()
 
@@ -30,3 +30,4 @@ router.route('/:id')//data passed as params
         addLectureToCourseById,
     );
 
+    export default router;

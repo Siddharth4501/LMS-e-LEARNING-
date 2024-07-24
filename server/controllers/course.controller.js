@@ -2,8 +2,8 @@ import fs from 'fs/promises'
 import path from 'path';
 
 import cloudinary from 'cloudinary';
-import Course from '../models/course.model';
-import AppError from '../utils/error.utils';
+import Course from '../models/course.model.js';
+import AppError from '../utils/error.utils.js';
 
 const getAllCourses=async(req,res,next)=>{
     const courses=await Course.find({}).select('-lectures');

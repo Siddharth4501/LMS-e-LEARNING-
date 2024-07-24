@@ -1,11 +1,11 @@
 import {Schema,model} from "mongoose"
-import bcrypt  from 'bcryptjs'
+import bcrypt  from 'bcrypt'
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto'
 const userSchema=new Schema({
     fullName:{
         type:'String',
-        required:[true,'Name is required'],
+        // required:[true,'Name is required'],
         minLength:[5,'Name must be of 5 character'],
         maxLength:[50,'Name should be less than 50 character'],
         lowercase:true,
@@ -13,7 +13,7 @@ const userSchema=new Schema({
     },
     email:{
         type:'String',
-        required:[true,'Email is required'],
+        // required:[true,'Email is required'],
         lowercase:true,
         trim:true,
         unique:true,
@@ -24,7 +24,7 @@ const userSchema=new Schema({
     },
     password:{
         type:'String',
-        required:[true,'Password is required'],
+        // required:[true,'Password is required'],
         minLength:[8,'Password must be of at least 8 character'],
         select:false //doesn't give access to password implicitly
     },

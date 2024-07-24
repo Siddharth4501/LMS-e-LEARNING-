@@ -1,6 +1,6 @@
 // import { request } from "express";
-import AppError from "../utils/error.utils";
-import User from "../models/user.model";
+import AppError from "../utils/error.utils.js";
+import User from "../models/user.model.js";
 import cloudinary from 'cloudinary'
 import fs from 'fs/promises';
 import sendEmail from "../utils/sendEmail.utils.js";
@@ -236,7 +236,7 @@ const changePassword=async(req,res)=>{
 
 
 }
-export const updateUser = async (req, res, next) => {
+const updateUser = async (req, res, next) => {
     // Destructuring the necessary data from the req object
     const { fullName } = req.body;
     const { id } = req.params;

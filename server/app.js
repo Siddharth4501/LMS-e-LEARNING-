@@ -22,7 +22,7 @@ app.use(cookieParser()); //parse token stored in cookie
 
 // routes of User,Course,Payment module
 
-app.use('/api/vi/user/',userRoutes)//if error comes in this process then it moves down and check other processes
+app.use('/api/v1/user/',userRoutes)//if error comes in this process then it moves down and check other processes
 app.use('/api/v1/courses', courseRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 

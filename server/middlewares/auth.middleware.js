@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import AppError from '../utils/error.utils';
+import AppError from '../utils/error.utils.js';
 
 const isLoggedIn=async(req,res,next)=>{
     const {token}=req.cookies;

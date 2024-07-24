@@ -1,6 +1,6 @@
-import User from "../models/user.model"
+import User from "../models/user.model.js"
 import crypto from 'crypto';
-import AppError from '../utils/AppError.js';
+import AppError from '../utils/error.utils.js';
 import { razorpay } from '../server.js';
 import Payment from '../models/payment.model.js';
 const getRazorpayApiKey=async(req,res,next)=>{
@@ -30,6 +30,7 @@ const buySubscription=async(req,res,next)=>{
 
   // Creating a subscription using razorpay that we imported from the server
   const subscription = await razorpay.subscriptions.create({
+    
     plan_id: process.env.RAZORPAY_PLAN_ID, // The unique plan ID
     customer_notify: 1, // 1 means razorpay will handle notifying the customer, 0 means we will not notify the customer
     total_count: 12, // 12 means it will charge every month for a 1-year sub.
