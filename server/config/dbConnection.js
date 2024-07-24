@@ -4,7 +4,9 @@ mongoose.set('strictQuery',false)//if required data or query doesn't exist then 
 
 const connectionToDB=async ()=>{
     try{
-        const connection= await mongoose.connect(`${process.env.MONGO_URI}/${DB_NAME}`)
+        const connection= await mongoose.connect(`${process.env.MONGO_URI}/${process.env.DB_NAME}`
+
+        )
         
         if(connection){
             console.log(`Connected to MongoDB: ${connection.host}`);
