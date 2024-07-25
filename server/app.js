@@ -13,8 +13,11 @@ app.use(express.json()) // for data parsing from frontend
 app.use(express.urlencoded({extended:true}));//helps parsing the url
 app.use(cors({
     origin: [process.env.FRONTEND_URL],
-    credentials:true
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials:true,
+    
 }));
+
 
 app.use(morgan('dev')); // keep track of url in log(in terminal)
 

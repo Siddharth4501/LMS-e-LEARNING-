@@ -7,6 +7,7 @@ import About from './pages/AboutPage.jsx'
 import Signup from './pages/Signup.jsx'
 import Login from './pages/Login.jsx'
 import Contact from './pages/Contact.jsx'
+import CourseList from './pages/Course/CourseList.jsx'
 function App() {
   
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/courses" element={<CourseList/>} />
           <Route path="*" element={<NotFound />} />
         </Routes> 
     </>

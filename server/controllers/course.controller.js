@@ -6,8 +6,9 @@ import Course from '../models/course.model.js';
 import AppError from '../utils/error.utils.js';
 
 const getAllCourses=async(req,res,next)=>{
+    
     const courses=await Course.find({}).select('-lectures');
-
+    
     res.status(200).json({
         success:true,
         message:'All courses',

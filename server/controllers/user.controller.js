@@ -11,8 +11,9 @@ const cookieOptions={
     secure:true,
     
 }
-const register=async(req,res)=>{
+const register=async(req,res,next)=>{
     const {fullName,email,password}=req.body
+    console.log('first')
 
     if (!fullName || !email || !password){ 
         //return instance of error
@@ -35,10 +36,11 @@ const register=async(req,res)=>{
     if(!user){
         return next(new AppError('User registration failed,please try again',400));
     }
-
+    console.log('dui',req.file.path)
     if(req.file)// from multer
         {
         try{
+            console.log('uppar')
             const result=await cloudinary.v2.uploader.upload(req.file.path,{
                 folder:'lms',
                 width:250,
@@ -47,15 +49,16 @@ const register=async(req,res)=>{
                 crop:'fill',
             });
             if(result){
+                console.log('kyu hai2')
                 user.avatar.public_id=result.public_id;
                 user.avatar.secure_url=result.secure_url;
-
+                console.log('kyu hai')
                 //remove file from server
                 fs.rm(`uploads/${req.file.filename}`)
             }
         }catch(e){
             fs.rm(`uploads/${req.file.filename}`)
-            return next(new AppError(error|| 'File not uploaded,please try',400))
+            return next(new AppError(e|| 'File not uploaded,please try',400))
         }
     }
 

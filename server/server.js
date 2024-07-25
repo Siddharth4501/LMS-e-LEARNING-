@@ -1,6 +1,6 @@
 
 import app from './app.js'
-import mongoose from 'mongoose';
+
 import {config} from 'dotenv';//considers contents of env file and execute it
 import connectionToDB from './config/dbConnection.js';
 import cloudinary from 'cloudinary'
