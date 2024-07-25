@@ -9,14 +9,16 @@ import courseRoutes from './routes/course.routes.js'
 import paymentRoutes from './routes/payment.routes.js'
 const app = express();
 
-app.use(express.json()) // for data parsing from frontend
-app.use(express.urlencoded({extended:true}));//helps parsing the url
 app.use(cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials:true,
     
 }));
+
+app.use(express.json()) // for data parsing from frontend
+app.use(express.urlencoded({extended:true}));//helps parsing the url
+
 
 
 app.use(morgan('dev')); // keep track of url in log(in terminal)

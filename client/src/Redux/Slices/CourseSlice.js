@@ -9,7 +9,7 @@ const initialState = {
 // function to get all courses
 export const getAllCourses = createAsyncThunk("/course/get", async () => {
   try {
-    const res = axiosInstance.get("/courses");
+    const res = axiosInstance.get("/courses/");
 
     toast.promise(res, {
       loading: "Loading courses data...",

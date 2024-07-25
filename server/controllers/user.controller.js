@@ -74,7 +74,7 @@ const register=async(req,res,next)=>{
     
 };
 
-const login=async (req,res)=>{
+const login=async (req,res,next)=>{
     try{
         const {email,password} =req.body;
 
@@ -114,7 +114,7 @@ const logout=(req,res)=>{
     });
 };
 
-const getProfile=async (req,res)=>{
+const getProfile=async (req,res,next)=>{
     try{
         const userId=req.user.id;
         const user=await User.findOne({userId})
@@ -128,7 +128,7 @@ const getProfile=async (req,res)=>{
     }
 };
 
-const forgetPassword=async (req,res)=>{
+const forgetPassword=async (req,res,next)=>{
     const {email}=req.body;
     if(!email){
         return next(new AppError('email is requuired',400));
@@ -158,7 +158,7 @@ const forgetPassword=async (req,res)=>{
     }
 }
 
-const resetPassword=async(req,res)=>
+const resetPassword=async(req,res,next)=>
     {
         // Extracting resetToken from req.params object
         const { resetToken } = req.params;
@@ -209,7 +209,7 @@ const resetPassword=async(req,res)=>
         });
 }
 
-const changePassword=async(req,res)=>{
+const changePassword=async(req,res,next)=>{
     const {oldPassword,newPassword} =req.body;
     const {id}=req.user;//all information of user is kept in req.user as created in auth.middleware.js
 
