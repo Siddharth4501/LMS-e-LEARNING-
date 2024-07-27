@@ -60,7 +60,7 @@ const HomeLayout = ({ children }) => {
 
         <div className="drawer-side w-0">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative" style={{backgroundColor:'rgb(39 43 47)',color:'white',}}>
+          <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative active:text-white focus:text-white text-white" style={{backgroundColor:'rgb(39 43 47)'}}>
             {/* close button for drawer */}
             <li className="w-fit absolute right-2 z-50">
               <button onClick={hideDrawer}>
