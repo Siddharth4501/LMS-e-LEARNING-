@@ -13,7 +13,7 @@ const cookieOptions={
 }
 const register=async(req,res,next)=>{
     const {fullName,email,password}=req.body
-    console.log('first')
+    
 
     if (!fullName || !email || !password){ 
         //return instance of error
@@ -36,11 +36,12 @@ const register=async(req,res,next)=>{
     if(!user){
         return next(new AppError('User registration failed,please try again',400));
     }
-    console.log('dui',req.file.path)
+    
     if(req.file)// from multer
         {
+       
+        
         try{
-            console.log('uppar')
             const result=await cloudinary.v2.uploader.upload(req.file.path,{
                 folder:'lms',
                 width:250,
@@ -49,12 +50,12 @@ const register=async(req,res,next)=>{
                 crop:'fill',
             });
             if(result){
-                console.log('kyu hai2')
+                
                 user.avatar.public_id=result.public_id;
                 user.avatar.secure_url=result.secure_url;
-                console.log('kyu hai')
+                
                 //remove file from server
-                fs.rm(`uploads/${req.file.filename}`)
+                await fs.rm(`uploads/${req.file.filename}`)
             }
         }catch(e){
             fs.rm(`uploads/${req.file.filename}`)
@@ -63,8 +64,9 @@ const register=async(req,res,next)=>{
     }
 
     await user.save();
-    user.select('-password')
+    
     const token=await user.generateJWTToken();
+    user.password=undefined
     res.cookie('token',token,cookieOptions)
     res.status(201).json({
         success:true,
@@ -77,20 +79,22 @@ const register=async(req,res,next)=>{
 const login=async (req,res,next)=>{
     try{
         const {email,password} =req.body;
-
+        
         if(!email || !password){
             return next(new AppError("All Fields Are Required",400))
         }
-
+        
         const user=await User.findOne({email}).select('+password');//because by default it is set not to show the password
-
-        if(!user || !user.comaprePassword(password)){
+        
+        if(!user || !user.comparePassword(password)){
             return next(new AppError('Email or password does not match',400))
         }
+        
         const token=await user.generateJWTToken();
-        user.select('-password')//remove password from the data to be send to frontend
+        user.password=undefined//remove password from the data to be send to frontend
+        
         res.cookie('token',token,cookieOptions);
-
+        
         res.status(200).json({
             success:true,
             message:'User LoggedIn Successfully',
@@ -102,6 +106,7 @@ const login=async (req,res,next)=>{
 };
 
 const logout=(req,res)=>{
+    
     res.cookie('token',null,{
         secure:true,
         maxAge:0,

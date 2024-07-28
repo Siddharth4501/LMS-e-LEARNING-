@@ -62,7 +62,7 @@ userSchema.pre('save',async function(next){
 
 // creating userdefined methods for userSchema
 userSchema.methods={
-    generateJWtToken: async function(){
+    generateJWTToken: async function(){
         return await jwt.sign(
             {id:this._id,email:this.email,subscription:this.subscription,role:this.role},//it is the the data stored in cookie
             process.env.JWT_SECRET,
@@ -71,7 +71,7 @@ userSchema.methods={
             }
         )
     },
-    comparPassword: async function(plainTextPassword){
+    comparePassword: async function(plainTextPassword){
         return await bcrypt.compare(plainTextPassword,this.password)
     },
     generatePasswordResetToken:async function(){
