@@ -14,6 +14,9 @@ import CourseDescription from './pages/Course/CourseDescription.jsx'
 import CreateCourse from './pages/Course/CreateCourse.jsx'
 import Profile from './pages/User/Profile.jsx'
 import EditProfile from './pages/User/EditProfile.jsx'
+import Checkout from './pages/Payment/Checkout.jsx'
+import CheckoutSuccess from './pages/Payment/CheckoutSuccess.jsx'
+import CheckoutFail from './pages/Payment/CheckoutFail.jsx'
 function App() {
   
 
@@ -34,6 +37,9 @@ function App() {
             <Route path="/course/description" element={<CourseDescription />} />
             <Route path="/user/profile" element={<Profile/>} />
             <Route path="/user/editprofile" element={<EditProfile/>} />
+            <Route path="/checkout" element={<Checkout/>} />
+            <Route path="/checkout/success" element={<CheckoutSuccess/>} />
+            <Route path="/checkout/fail" element={<CheckoutFail/>} />
           </Route>
 
           {/* <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
