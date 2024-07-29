@@ -9,7 +9,10 @@ const connectionToDB=async ()=>{
         )
         
         if(connection){
-            console.log(`Connected to MongoDB: ${connection.host}`);
+            console.log(`Connected to MongoDB: ${connection.connection.host}`,{
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
         }
     } catch(e){
         console.log(e);
