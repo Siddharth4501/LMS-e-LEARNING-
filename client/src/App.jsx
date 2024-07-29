@@ -13,6 +13,7 @@ import RequireAuth from './components/Auth/RequireAuth.jsx'
 import CourseDescription from './pages/Course/CourseDescription.jsx'
 import CreateCourse from './pages/Course/CreateCourse.jsx'
 import Profile from './pages/User/Profile.jsx'
+import EditProfile from './pages/User/EditProfile.jsx'
 function App() {
   
 
@@ -22,7 +23,7 @@ function App() {
        <Routes>
           <Route path="/" element={<Homepage/>} />
           <Route path="/about" element={<About/>} />
-          <Route path="/user/profile" element={<Profile/>} />
+          
           <Route path="/denied" element={<Denied/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
@@ -31,6 +32,8 @@ function App() {
           <Route path="/course/create" element={<CreateCourse />} />
           <Route element={<RequireAuth allowedRoles={["USER", "ADMIN"]} />}>
             <Route path="/course/description" element={<CourseDescription />} />
+            <Route path="/user/profile" element={<Profile/>} />
+            <Route path="/user/editprofile" element={<EditProfile/>} />
           </Route>
 
           {/* <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>

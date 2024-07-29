@@ -6,7 +6,7 @@ import axiosInstance from "../../Helpers/axiosinstance";
 const initialState={
     isLoggedIn:localStorage.getItem('isLoggedIn') || false,
     role:localStorage.getItem('role') || '',
-    data:localStorage.getItem('data') || {}
+    data:JSON.parse(localStorage.getItem('data')) || {}
 }
 // there is no need to make a reducer for the signup action because we dont neet to store anything in store ,we simply pefomt async operation so thunk is enough for it
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
@@ -83,6 +83,51 @@ export const getUserData = createAsyncThunk("/user/details", async () => {
     return res?.data;
   } catch (error) {
     toast.error(error.message);
+  }
+});
+
+// function to update user profile
+export const updateProfile = createAsyncThunk(
+  "/user/update/profile",
+  async (data) => {
+    try {
+      let res = axiosInstance.put(`/user/update/${data[0]}`, data[1]);
+
+      toast.promise(res, {
+        loading: "Updating...",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to update profile",
+      });
+      // getting response resolved here
+      res = await res;
+      return res.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
+
+// function to reset the password
+export const resetPassword = createAsyncThunk("/user/reset", async (data) => {
+  try {
+    let res = axiosInstance.post(`/user/reset/${data.resetToken}`, {
+      password: data.password,
+    });
+
+    toast.promise(res, {
+      loading: "Resetting...",
+      success: (data) => {
+        return data?.data?.message;
+      },
+      error: "Failed to reset password",
+    });
+    // getting response resolved here
+    res = await res;
+    return res.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
   }
 });
 
