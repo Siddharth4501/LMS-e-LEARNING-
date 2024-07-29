@@ -4,7 +4,7 @@ import AppError from '../utils/error.utils.js';
 import { razorpay } from '../server.js';
 import Payment from '../models/payment.model.js';
 const getRazorpayApiKey=async(req,res,next)=>{
-
+  
     res.status(200).json({
         success:true,
         message:'Razorpay API key',
