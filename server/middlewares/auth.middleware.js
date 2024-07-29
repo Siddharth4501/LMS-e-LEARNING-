@@ -12,8 +12,9 @@ const isLoggedIn=async(req,res,next)=>{
     if(!userDetails){
         return next(new AppError('Token can not be verified',400))
     }
+    console.log("chdbak")
     req.user=userDetails;
-
+    console.log("kd",req.user)
     next();
 }
 

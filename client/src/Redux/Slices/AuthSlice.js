@@ -74,6 +74,18 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   }
 });
 
+// function to fetch user data
+export const getUserData = createAsyncThunk("/user/details", async () => {
+  try {
+    console.log("11")
+    const res = await axiosInstance.get("/user/me");
+    console.log("22",res.data)
+    return res?.data;
+  } catch (error) {
+    toast.error(error.message);
+  }
+});
+
 const authSlice=createSlice({
     name:'auth',
     initialState,
@@ -95,6 +107,14 @@ const authSlice=createSlice({
           state.isLoggedIn = false;
           state.data = {};
         })
+
+        .addCase(getUserData.fulfilled, (state, action) => {
+          localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+          localStorage.setItem("isLoggedIn", true);
+          state.isLoggedIn = true;
+          state.data = action?.payload?.user;
+          state.role = action?.payload?.user?.role;
+        });
 
       }});
 

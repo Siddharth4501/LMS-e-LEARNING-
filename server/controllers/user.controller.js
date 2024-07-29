@@ -121,8 +121,11 @@ const logout=(req,res)=>{
 
 const getProfile=async (req,res,next)=>{
     try{
-        const userId=req.user.id;
-        const user=await User.findOne({userId})
+        console.log("pp",req.user.id)
+        const userId=req.user.id
+        console.log("userId",userId)
+        const user=await User.findById(userId)
+        console.log("gg",user)
         res.status(200).json({
             success:true,
             message:'User Details',
