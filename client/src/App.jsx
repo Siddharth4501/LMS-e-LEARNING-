@@ -12,6 +12,7 @@ import Denied from './pages/Denied.jsx'
 import RequireAuth from './components/Auth/RequireAuth.jsx'
 import CourseDescription from './pages/Course/CourseDescription.jsx'
 import CreateCourse from './pages/Course/CreateCourse.jsx'
+import Profile from './pages/User/Profile.jsx'
 function App() {
   
 
@@ -21,6 +22,7 @@ function App() {
        <Routes>
           <Route path="/" element={<Homepage/>} />
           <Route path="/about" element={<About/>} />
+          <Route path="/user/profile" element={<Profile/>} />
           <Route path="/denied" element={<Denied/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
