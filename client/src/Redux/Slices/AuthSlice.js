@@ -6,7 +6,7 @@ import axiosInstance from "../../Helpers/axiosinstance";
 const initialState={
     isLoggedIn:localStorage.getItem('isLoggedIn') || false,
     role:localStorage.getItem('role') || '',
-    data:JSON.parse(localStorage.getItem('data')) || {}
+    data:localStorage.getItem('data') || {}
 }
 // there is no need to make a reducer for the signup action because we dont neet to store anything in store ,we simply pefomt async operation so thunk is enough for it
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
