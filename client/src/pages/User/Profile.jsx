@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import HomeLayout from "../../Layouts/HomeLayout";
 import { getUserData } from "../../Redux/Slices/AuthSlice.js";
-// import { cancelCourseBundle } from "../../Redux/razorpaySlice";
+import { cancelCourseBundle } from "../../Redux/Slices/RazorpaySlice.js";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Profile = () => {
   
   // function to handle the cancel subscription of course
   const handleCourseCancelSubscription = async () => {
-    // await dispatch(cancelCourseBundle());
+    await dispatch(cancelCourseBundle());
     await dispatch(getUserData());
   };
 
