@@ -14,8 +14,7 @@ router.route('/subscribe')
 router.route('/verify')
     .post(isLoggedIn,verifySubscription)
 
-router
-    .route('/unsubscribe')
+router.route('/unsubscribe')
     .post(isLoggedIn, authorizeSubscribers, cancelSubscription);
 
 router.route('/')
