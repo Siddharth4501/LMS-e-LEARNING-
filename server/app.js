@@ -7,6 +7,7 @@ import userRoutes from './routes/user.routes.js'
 import errorMiddleware from './middlewares/error.middleware.js';
 import courseRoutes from './routes/course.routes.js'
 import paymentRoutes from './routes/payment.routes.js'
+import miscRoutes from './routes/miscellaneous.routes.js';
 const app = express();
 
 app.use(cors({
@@ -26,7 +27,7 @@ app.use(morgan('dev')); // keep track of url in log(in terminal)
 app.use(cookieParser()); //parse token stored in cookie
 
 // routes of User,Course,Payment module
-
+app.use('/api/v1', miscRoutes);
 app.use('/api/v1/user',userRoutes)//if error comes in this process then it moves down and check other processes
 app.use('/api/v1/courses', courseRoutes);
 app.use('/api/v1/payments', paymentRoutes);
