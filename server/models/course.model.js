@@ -28,7 +28,7 @@ const courseSchema=new Schema(
                         // required:true,
                     },
                     secure_url:{
-                        tyep:String,
+                        type:String,
                         // required:true,
                     },
                 },

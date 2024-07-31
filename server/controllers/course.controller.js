@@ -121,7 +121,7 @@ const removeCourse=async(req,res,next)=>{
 const addLectureToCourseById=async(req,res,next)=>{
     const { title, description } = req.body;
     const { id } = req.params;
-
+    console.log("test4")
     let lectureData = {
         public_id:'',
         secure_url:'',
@@ -132,7 +132,7 @@ const addLectureToCourseById=async(req,res,next)=>{
     }
 
     const course = await Course.findById(id);
-
+    console.log("test5")
     if (!course) {
         return next(new AppError('Invalid course id or course not found.', 400));
     }
@@ -140,6 +140,7 @@ const addLectureToCourseById=async(req,res,next)=>{
     // Run only if user sends a file
     if (req.file) {
         try {
+            console.log("test6")
             const result = await cloudinary.v2.uploader.upload(req.file.path, {
                 folder: 'lms', // Save files in a folder named lms
                 chunk_size: 50000000, // 50 mb size
@@ -148,11 +149,14 @@ const addLectureToCourseById=async(req,res,next)=>{
 
             // If success
             if (result) {
+                console.log("test7",result)
+                console.log("sid1",result.public_id)
+                console.log("sid2",result.secure_url)
                 // Set the public_id and secure_url in array
                 lectureData.public_id = result.public_id;
                 lectureData.secure_url = result.secure_url;
             }
-
+            console.log("test8")
             // After successful upload remove the file from local storage
             fs.rm(`uploads/${req.file.filename}`);
         } catch (error) {
@@ -178,10 +182,11 @@ const addLectureToCourseById=async(req,res,next)=>{
     });
 
     course.numberOfLectures = course.lectures.length;
-
+    console.log("test9",course)
     // Save the course object
     await course.save();
-
+    
+    console.log("test10")
     res.status(200).json({
         success: true,
         message: 'Course lecture added successfully',
