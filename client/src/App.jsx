@@ -21,6 +21,8 @@ import DisplayLectures from './pages/Dashboard/DisplayLectures.jsx'
 import AddLectures from './pages/Dashboard/AddLecture.jsx'
 import AdminDashboard from './pages/Dashboard/AdminDashboard.jsx'
 import ChangePassword from './pages/Password/ChangePassword.jsx'
+import ForgetPassword from './pages/Password/ForgetPassword.jsx'
+import ResetPassword from './pages/Password/ResetPassword.jsx'
 function App() {
   
 
@@ -31,7 +33,8 @@ function App() {
           <Route path="/" element={<Homepage/>} />
           
           <Route path="/about" element={<About/>} />
-          
+          <Route path="/forgetpassword" element={<ForgetPassword/>} />
+          <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           <Route path="/denied" element={<Denied/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
