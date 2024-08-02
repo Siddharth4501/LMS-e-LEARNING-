@@ -18,11 +18,11 @@ const CourseDescription = () => {
       {/* wrapper for course description */}
       <div className="min-h-[90vh] pt-12 sm:px-20 px-5 flex flex-col items-center justify-center text-white bg-gray-600">
         {/* displaying the course details */}
-        <div className="md:grid grid-cols-2 gap-10 py-10 relative">
+        <div className="md:grid grid-cols-2 gap-10 py-10 relative bg-gray-800 px-5">
           {/* creating the left side of description box */}
           <div className="space-y-5 ">
             <img
-              className="w-full md:h-64 border-4 border-orange-500 border-solid"
+              className="w-full h-64 border-4 border-orange-500 border-solid"
               src={state?.thumbnail?.secure_url}
               alt="thumbnail"
             />
