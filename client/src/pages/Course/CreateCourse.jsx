@@ -11,7 +11,7 @@ const CreateCourse = () => {
   const navigate = useNavigate();
   
   // for getting the data from location of previous component
-  // const { initialCourseData } = useLocation().state;
+  const { initialCourseData } = useLocation().state;
 
   // for toggling disable of image input box
   // const [isDisabled, setIsDisabled] = useState(!initialCourseData?.newCourse);
