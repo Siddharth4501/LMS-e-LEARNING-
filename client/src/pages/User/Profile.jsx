@@ -66,7 +66,7 @@ const Profile = () => {
                   ? "/denied"
                   : "/user/editprofile"
               }
-              className="sm:w-1/2 w-full border border-yellow-600 hover:border-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2  font-semibold cursor-pointer text-center"
+              className="sm:w-1/2 w-full border border-yellow-600 bg-yellow-600 hover:bg-yellow-700 transition-all ease-in-out duration-300 rounded-sm py-2  font-semibold cursor-pointer text-center"
             >
               <button>Edit Profile</button>
             </Link>
