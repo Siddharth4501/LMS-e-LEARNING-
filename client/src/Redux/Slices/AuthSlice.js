@@ -77,9 +77,7 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 // function to fetch user data
 export const getUserData = createAsyncThunk("/user/details", async () => {
   try {
-    console.log("11")
     const res = await axiosInstance.get("/user/me");
-    console.log("22",res.data)
     return res?.data;
   } catch (error) {
     toast.error(error.message);
