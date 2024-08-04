@@ -82,6 +82,7 @@ userSchema.methods={
         .digest('hex')
         ;// this is done so that prevent storing data in its original form in database due to security purposes
         this.forgetPasswordExpiry=Date.now() + 15*60*1000; // 15 min from from now
+        return resetToken;
     }
     
 }
