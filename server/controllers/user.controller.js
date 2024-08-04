@@ -3,6 +3,7 @@ import AppError from "../utils/error.utils.js";
 import User from "../models/user.model.js";
 import cloudinary from 'cloudinary'
 import fs from 'fs/promises';
+import crypto from 'crypto'
 import sendEmail from "../utils/sendEmail.utils.js";
 
 const cookieOptions={
@@ -121,11 +122,11 @@ const logout=(req,res)=>{
 
 const getProfile=async (req,res,next)=>{
     try{
-        console.log("pp",req.user.id)
+        
         const userId=req.user.id
-        console.log("userId",userId)
+        
         const user=await User.findById(userId)
-        console.log("gg",user)
+        
         res.status(200).json({
             success:true,
             message:'User Details',
@@ -146,10 +147,9 @@ const forgetPassword=async (req,res,next)=>{
         return next(new AppError('email not registered',400));
     }
     const resetToken=await user.generatePasswordResetToken();
-
     await user.save();
     const resetPasswordURL=`${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
-
+    
     try{
         const subject='Reset Password'
         const message=`You can reset your password by clicking <a href=${resetPasswordURL} target="_blank">Reset Your Password</>\n If above link dose not work then copy paste this link in new tab ${resetPasswordURL}`
@@ -185,7 +185,7 @@ const resetPassword=async(req,res,next)=>
           return next(new AppError('Password is required', 400));
         }
       
-        console.log(forgotPasswordToken);
+        console.log("sid",forgotPasswordToken);
       
         // Checking if token matches in DB and if it is still valid(Not expired)
         const user = await User.findOne({
