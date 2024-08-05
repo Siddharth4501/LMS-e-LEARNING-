@@ -236,7 +236,7 @@ const AdminDashboard = () => {
                     <td>{element?.category}</td>
                     <td>{element?.createdBy}</td>
                     <td>{element?.numberOfLectures}</td>
-                    <td className="max-w-28 overflow-hidden text-ellipsis whitespace-nowrap">
+                    <td className="max-w-30 overflow-hidden text-ellipsis whitespace-nowrap">
                       <textarea
                         readOnly
                         className="w-80 h-auto bg-transparent resize-none"
