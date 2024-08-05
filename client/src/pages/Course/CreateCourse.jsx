@@ -14,16 +14,16 @@ const CreateCourse = () => {
   const { initialCourseData } = useLocation().state;
 
   // for toggling disable of image input box
-  // const [isDisabled, setIsDisabled] = useState(!initialCourseData?.newCourse);
+  const [isDisabled, setIsDisabled] = useState(!initialCourseData?.newCourse);
 
   // for storing the user input
   const [userInput, setUserInput] = useState({
-    title: '',
-    category: '',
-    createdBy: '',
-    description: '',
+    title: initialCourseData?.title,
+    category: initialCourseData?.category,
+    createdBy: initialCourseData?.createdBy,
+    description: initialCourseData?.description,
     thumbnail: null,
-    previewImage: '',
+    previewImage: initialCourseData?.thumbnail?.secure_url,
   });
 
   // function to handle the image upload
@@ -170,7 +170,7 @@ const CreateCourse = () => {
                   id="image_uploads"
                   name="image_uploads"
                   accept=".jpg, .jpeg, .png"
-                  // disabled={isDisabled}
+                  disabled={isDisabled}
                 />
               </div>
 
@@ -252,8 +252,7 @@ const CreateCourse = () => {
             className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
             type="submit"
           >
-            Create Course
-            {/* {!initialCourseData.newCourse ? "Update Course" : "Create Course"} */}
+            {!initialCourseData.newCourse ? "Update Course" : "Create Course"}
           </button>
         </form>
       </div>
