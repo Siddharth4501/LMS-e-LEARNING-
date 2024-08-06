@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
-import { NavLink,Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Footer from "../components/Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
