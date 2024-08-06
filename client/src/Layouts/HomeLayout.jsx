@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink,Link, useNavigate } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Footer from "../components/Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,7 +60,7 @@ const HomeLayout = ({ children }) => {
 
         <div className="drawer-side w-0">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative active:text-white focus:text-white text-white bg-black">
+          <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative text-white bg-black">
             {/* close button for drawer */}
             <li className="w-fit absolute right-2 z-50">
               <button onClick={hideDrawer}>
@@ -68,27 +68,27 @@ const HomeLayout = ({ children }) => {
               </button>
             </li>
 
-            <li>
-              <Link to={"/"}>Home</Link>
+            <li className="active:text-white hover:text-white focus:text-white text-white">
+              <NavLink to={"/"}>Home</NavLink>
             </li>
 
             {/* displaying dashboard, if user is logged in */}
             {isLoggedIn && role === "ADMIN" && (
-              <li>
-                <Link to={"/admin/dashboard"}>Admin Dashboard</Link>
+              <li className="active:text-white hover:text-white focus:text-white text-white">
+                <NavLink to={"/admin/dashboard"}>Admin Dashboard</NavLink>
               </li>
             )}
 
-            <li>
-              <Link to={"/courses"}>All Courses</Link>
+            <li className="active:text-white hover:text-white focus:text-white text-white">
+              <NavLink to={"/courses"}>All Courses</NavLink>
             </li>
 
-            <li>
-              <Link to={"/contact"}>Contact Us</Link>
+            <li className="active:text-white hover:text-white focus:text-white text-white">
+              <NavLink to={"/contact"}>Contact Us</NavLink>
             </li>
 
-            <li>
-              <Link to={"/about"}>About Us</Link>
+            <li className="active:text-white hover:text-white focus:text-white text-white">
+              <NavLink to={"/about"}>About Us</NavLink>
             </li>
 
             {/* creating the bottom part of drawer */}
@@ -97,10 +97,10 @@ const HomeLayout = ({ children }) => {
               <li className="absolute bottom-4 w-[90%]">
                 <div className="w-full flex items-center justify-center">
                   <button className="bg-primary px-4 py-1 font-semibold rounded-md w-full text-dark">
-                    <Link to={"/login"}>Login</Link>
+                    <NavLink to={"/login"}>Login</NavLink>
                   </button>
                   <button className="bg-secondary px-4 py-1 font-semibold rounded-md w-full">
-                    <Link to={"/signup"}>Signup</Link>
+                    <NavLink to={"/signup"}>Signup</NavLink>
                   </button>
                 </div>
               </li>
@@ -111,10 +111,10 @@ const HomeLayout = ({ children }) => {
               <li className="absolute bottom-4 w-[90%]">
                 <div className="w-full flex items-center justify-center">
                   <button className="bg-primary px-4 py-1 font-semibold rounded-md w-full">
-                    <Link to={"/user/profile"}>Profile</Link>
+                    <NavLink to={"/user/profile"}>Profile</NavLink>
                   </button>
                   <button className="bg-secondary px-4 py-1 font-semibold rounded-md w-full">
-                    <Link onClick={handleLogout}>Logout</Link>
+                    <NavLink onClick={handleLogout}>Logout</NavLink>
                   </button>
                 </div>
               </li>
