@@ -23,6 +23,7 @@ import AdminDashboard from './pages/Dashboard/AdminDashboard.jsx'
 import ChangePassword from './pages/Password/ChangePassword.jsx'
 import ForgetPassword from './pages/Password/ForgetPassword.jsx'
 import ResetPassword from './pages/Password/ResetPassword.jsx'
+import NotRequireAuth from './components/Auth/NotRequireAuth.jsx'
 function App() {
   
 
@@ -31,16 +32,17 @@ function App() {
       
        <Routes>
           <Route path="/" element={<Homepage/>} />
-          
           <Route path="/about" element={<About/>} />
           <Route path="/forgetpassword" element={<ForgetPassword/>} />
           <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           <Route path="/denied" element={<Denied/>} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/login" element={<Login/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/courses" element={<CourseList/>} />
           
+          <Route element={<NotRequireAuth />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
 
           <Route element={<RequireAuth allowedRoles={["USER", "ADMIN"]} />}>
             <Route path="/course/description" element={<CourseDescription />} />
@@ -58,6 +60,7 @@ function App() {
             <Route path="/course/addlecture" element={<AddLectures />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes> 
 
