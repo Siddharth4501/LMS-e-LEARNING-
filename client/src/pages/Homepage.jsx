@@ -1,6 +1,6 @@
 import React from 'react'
 import HomeLayout from '../Layouts/HomeLayout.jsx'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import homePageImg from '../assets/images/homePageMainImage.png';
 const Homepage = () => {
   return (
@@ -19,17 +19,17 @@ const Homepage = () => {
           </p>
 
           {/* for buttons */}
-          <div className="space-x-6">
-            <Link to={"/courses"}>
-              <button className="bg-yellow-500 px-5 py-3 rounded-md font-semibold md:text-lg text-xl cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300 mb-3">
+          <div className="flex gap-3">
+            <NavLink to={"/courses"}>
+              <button className="bg-yellow-500 md:px-5 px-2 py-3 rounded-md font-semibold md:text-lg text-sm cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300 mb-3">
                 Explore Courses
               </button>
-            </Link>
-            <Link to={"/contact"}>
-              <button className="border border-yellow-500 px-5 py-3 rounded-md font-semibold md:text-lg text-xl cursor-pointer hover:border-yellow-600 transition-all ease-in-out duration-300 hover:bg-yellow-500">
+            </NavLink>
+            <NavLink to={"/contact"} className="">
+              <button className="border border-yellow-500 md:px-5 bg-yellow-500 px-2 py-3 rounded-md font-semibold md:text-lg text-sm cursor-pointer hover:border-yellow-600 transition-all ease-in-out duration-300 hover:bg-yellow-600">
                 Contact Us
               </button>
-            </Link>
+            </NavLink>
           </div>
         </div>
 
